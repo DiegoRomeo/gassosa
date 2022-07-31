@@ -20,11 +20,19 @@ export class PhysicsWorld {
   }
 
   /**
+   * Add new entities to the world.
+   * @param  {...any} entities The entities to be added to the world.
+   */
+  add(...entities) {
+    entities.map(x => this.addEntity(x));
+  }
+
+  /**
    * Add a new entity to the world.
    * @param {Object} new_entity The new entity to be added.
    * @returns 
    */
-  add(new_entity) {
+  addEntity(new_entity) {
     if (new_entity instanceof RigidBody) {
       this.rigid_bodies.push(new_entity);
       this.force_registry.add(this.gravity, new_entity);
