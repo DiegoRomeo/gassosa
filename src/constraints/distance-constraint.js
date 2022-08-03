@@ -27,9 +27,9 @@ export class DistanceConstraint {
     let difference = this.length - distance;
     let percentage = difference / distance / 2;
     
-    let offset = scalarM(ds, percentage);
+    let offset = scalarM(ds, percentage * this.stiffness);
 
-    this.objA.position = sub(this.objA.position, offset);
-    this.objB.position = add(this.objB.position, offset);
+    this.objA.position = sub(this.objA.position, scalarM(offset, this.objA.mass / (this.objA.mass + this.objB.mass)));
+    this.objB.position = add(this.objB.position, scalarM(offset, this.objB.mass / (this.objA.mass + this.objB.mass)));
   }
 }
